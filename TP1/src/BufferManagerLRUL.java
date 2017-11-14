@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.List;
 
 
 public class BufferManagerLRUL {
@@ -46,16 +45,23 @@ public class BufferManagerLRUL {
 	
 	 @Override
 	public String toString() {
-		return "BufferManagerLRUL [bufferPool=" + bufferPool + "]";
+		StringBuffer sb = new StringBuffer();
+		for(int i=0; i < this.bufferPool.size(); i++){
+			Frame pageTemp = (Frame) this.bufferPool.get(i);
+			sb.append("P"+ i + " " + pageTemp.getPage() + "\r\n");
+		}
+		return sb.toString();
 	}
 
 	public static void main(String[] args) {
 		BufferManagerLRUL bm = new BufferManagerLRUL();
 		
-		bm.read("A");
-		bm.read("B");
-		bm.read("A");
-		bm.read("B");
+		String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"};
+		 
+		for(int i = 0; i<listToRead.length; i++){
+			bm.read(listToRead[i]);
+			System.out.println(bm);
+		}
 		
 		System.out.println(bm);
 		
