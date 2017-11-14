@@ -5,6 +5,11 @@ public class Frame {
 	private boolean dirty;
 	private String page;
 	
+	public Frame(boolean dirty, String page){
+		this.dirty = dirty;
+		this.page = page;		
+	}
+	
 	public Frame(int pinCount, boolean dirty, String page){
 		this.pinCount = pinCount;
 		this.dirty = dirty;
