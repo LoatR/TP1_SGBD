@@ -17,12 +17,12 @@ public class BufferManagerLRUL {
 		//Page dans le buffer, on l'a met devant
 		if(index != -1){
 			Frame temp = (Frame) this.bufferPool.remove(index);
-			this.bufferPool.addFirst(temp);;
+			this.bufferPool.addFirst(temp);
 		}
 		
 		//Le buffer n'est pas plein
 		else if(bufferPool.size() < BUFFER_POOL_SIZE){
-			this.bufferPool.addFirst(new Frame(false, page));
+			this.bufferPool.addFirst(new Frame(0, page));
 		}
 		//Le buffer est plein et la page n'est pas dans le buffer
 		else{

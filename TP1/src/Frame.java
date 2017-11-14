@@ -1,21 +1,21 @@
 
 public class Frame {
 	
-	private boolean dirty;
+	private int flag;
 	private String page;
 	
-	public Frame(boolean dirty, String page){
-		this.dirty = dirty;
+	public Frame(int flag, String page){
+		this.flag = flag;
 		this.page = page;		
 	}
 
 
-	public boolean isDirty() {
-		return dirty;
+	public int getFlag() {
+		return flag;
 	}
 
-	public void setDirty(boolean dirty) {
-		this.dirty = dirty;
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	public String getPage() {
@@ -28,7 +28,7 @@ public class Frame {
 	
 	@Override
 	public String toString() {
-		return "Frame [dirty=" + dirty + ", page=" + page + "]";
+		return "Frame [dirty=" + flag + ", page=" + page + "]";
 	}
 
 	
