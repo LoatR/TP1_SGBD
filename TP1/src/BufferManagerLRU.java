@@ -5,18 +5,25 @@ import java.util.Date;
 public class BufferManagerLRU {
 	
 	private Frame bufferPool[];
-	//private Date lastAccess[];
 	private String storageDisk[] = {"A","B","C","D","E","F","G"};
 	
+	private int numberOfElementsBuffer;
+	
+	private static int BUFFER_POOL_SIZE = 4;
+	
 	public BufferManagerLRU(){
-		this.bufferPool = new Frame[4];
+		this.bufferPool = new Frame[BUFFER_POOL_SIZE];
 		//this.lastAccess = new Date[4];
 	}
 	
 	private void read(String page){
-		Frame bufferPoolCopy[] = new Frame[4];
+		Frame bufferPoolCopy[] = new Frame[BUFFER_POOL_SIZE];
 		int index = isInBufferPool(page);
 		
+		if(numberOfElements() < BUFFER_POOL_SIZE){
+			bufferPoolCopy[0] = new Frame(false, page);
+			
+		}
 		
 		if( index != -1){	
 			bufferPoolCopy[0] = bufferPool[index];
@@ -38,13 +45,7 @@ public class BufferManagerLRU {
 	}
 	
 	private int numberOfElements(){
-		int cpt = 0;
-		for(int i=0; i<this.bufferPool.length; i++){
-			if(this.bufferPool[i] != null)
-				cpt++;
-		}
-		return cpt;
-		
+		return numberOfElementsBuffer;		
 	}
 	
 	
