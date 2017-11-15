@@ -59,8 +59,6 @@ public class BufferManagerFIFO {
 			}
 
 			
-			System.out.println(bm);
-			
 		}
 	
 }

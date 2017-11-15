@@ -11,23 +11,24 @@ public class BufferManagerLRUL {
 	}
 	
 	public void read(String page){
-		//Verif si page déjà dans le buffer
 		int index = isIntheBuffer(page);
 		
-		//Page dans le buffer, on l'a met devant
 		if(index != -1){
+			//La page est dans le buffer
 			Frame temp = (Frame) this.bufferPool.remove(index);
 			this.bufferPool.addFirst(temp);
 		}
 		
-		//Le buffer n'est pas plein
-		else if(bufferPool.size() < BUFFER_POOL_SIZE){
-			this.bufferPool.addFirst(new Frame(0, page));
-		}
-		//Le buffer est plein et la page n'est pas dans le buffer
-		else{
-			Frame temp = (Frame) this.bufferPool.removeLast();
-			this.bufferPool.addFirst(temp);
+		else {
+			//La page n'est pas dans le buffer
+			if(bufferPool.size() < BUFFER_POOL_SIZE){
+				//Le buffer est pas plein
+				this.bufferPool.addFirst(new Frame(0, page));
+			}else{
+				//Le buffer est plein
+				this.bufferPool.removeLast();
+				this.bufferPool.addFirst(new Frame(0, page));
+			}
 		}
 		
 	}
@@ -62,9 +63,6 @@ public class BufferManagerLRUL {
 			bm.read(listToRead[i]);
 			System.out.println(bm);
 		}
-		
-		System.out.println(bm);
-		
 		
 	}
 	
