@@ -5,7 +5,7 @@ public class BufferManagerClock {
 	private Frame[] bufferPool;
 	private int needlePos = 0; // Position de l'aiguille
 
-	private static int BUFFER_POOL_SIZE = 3;
+	private static int BUFFER_POOL_SIZE = 4;
 
 	public BufferManagerClock() {
 		this.bufferPool = new Frame[BUFFER_POOL_SIZE];
@@ -92,6 +92,7 @@ public class BufferManagerClock {
 		BufferManagerClock bm = new BufferManagerClock();
 
 		String listToRead[] = { "A", "B", "A", "C", "D", "C", "E", "F", "G", "A" };
+		String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
 		String listToRead2[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
 
 		for (int i = 0; i < listToRead2.length; i++) {

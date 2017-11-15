@@ -52,6 +52,7 @@ public class BufferManagerFIFO {
 			
 			String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"};
 			String listToRead2[] = { "A", "B", "A", "C", "D", "C", "G", "E", "B", "A" };
+			String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
 
 			for (int i = 0; i < listToRead.length; i++) {
 				bm.read(listToRead2[i]);

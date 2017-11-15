@@ -30,7 +30,6 @@ public class BufferManagerLRUL {
 				this.bufferPool.addFirst(new Frame(0, page));
 			}
 		}
-		
 	}
 	
 	public int isIntheBuffer(String page){
@@ -39,8 +38,7 @@ public class BufferManagerLRUL {
 			if(pageTemp.getPage().equals(page))
 				return i;
 		}
-		return -1;
-		
+		return -1;	
 	}
 	
 	
@@ -58,6 +56,7 @@ public class BufferManagerLRUL {
 		BufferManagerLRUL bm = new BufferManagerLRUL();
 		
 		String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"};
+		String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
 		 
 		for(int i = 0; i<listToRead.length; i++){
 			bm.read(listToRead[i]);
