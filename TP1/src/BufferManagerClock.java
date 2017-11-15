@@ -2,36 +2,88 @@ import java.util.LinkedList;
 
 public class BufferManagerClock {
 
-	private LinkedList bufferPool;
-	private int needlePos; // Position de l'aiguille
+	private Frame[] bufferPool;
+	private int needlePos = 0; // Position de l'aiguille
 
-	private static int BUFFER_POOL_SIZE = 4;
+	private static int BUFFER_POOL_SIZE = 3;
 
 	public BufferManagerClock() {
-		this.bufferPool = new LinkedList<Frame>();
+		this.bufferPool = new Frame[BUFFER_POOL_SIZE];
 		this.needlePos = 0;
 	}
 
 	public void read(String page) {
-		//TODO
+		int index = isIntheBuffer(page);
+
+		if(this.sizeBuffer() < BUFFER_POOL_SIZE){
+			//Le buffer n'est pas plein
+			if(index != -1){
+				//La page existe
+				this.bufferPool[index].setFlag(1);
+			}else{
+				//La page n'existe pas
+				this.bufferPool[this.sizeBuffer()] = new Frame(0, page);
+			}
+		}else {
+			//Le buffer est PLEIN
+			if(index == -1){
+				//La page n'est pas dans le buffer
+				if(this.bufferPool[needlePos].getFlag() == 0){
+					//Le flag est à 0
+					this.remplace(page);
+				}else{
+					//Le flag est à 1
+					do {
+						this.bufferPool[needlePos].setFlag(0);
+						this.next();
+					}while(this.bufferPool[needlePos].getFlag() == 1);
+					this.remplace(page);					
+				}
+			}else{
+				//La page est dans le buffer
+				this.bufferPool[index].setFlag(1);
+			}
+		}
 	}
 
 	public int isIntheBuffer(String page) {
-		for (int i = 0; i < this.bufferPool.size(); i++) {
-			Frame pageTemp = (Frame) this.bufferPool.get(i);
+		for (int i = 0; i < this.sizeBuffer(); i++) {
+			Frame pageTemp = (Frame) this.bufferPool[i];
 			if (pageTemp.getPage().equals(page))
 				return i;
 		}
 		return -1;
-
+	}
+	
+	public int sizeBuffer(){
+		int cpt=0; 
+		for(int i = 0; i <this.bufferPool.length; i++){
+			if(this.bufferPool[i] != null)
+				cpt++;
+		}
+		return cpt;
+	}
+	
+	public void remplace(String page){
+		this.bufferPool[needlePos] = new Frame(0, page);
+		this.next();
+	}
+	
+	public void next(){
+		if(needlePos == BUFFER_POOL_SIZE-1){
+			needlePos = 0;
+		}else{
+			needlePos++;
+		}
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < this.bufferPool.size(); i++) {
-			Frame pageTemp = (Frame) this.bufferPool.get(i);
-			sb.append("P" + i + " " + pageTemp.getPage() + "\r\n");
+		sb.append("Needle : P" + this.needlePos + "\n");
+		for (int i = 0; i < this.sizeBuffer(); i++) {
+			Frame pageTemp = (Frame) this.bufferPool[i];
+			sb.append("P" + i + " " + pageTemp.getPage() + " " + pageTemp.getFlag() + "\r\n");
 		}
 		return sb.toString();
 	}
@@ -40,14 +92,12 @@ public class BufferManagerClock {
 		BufferManagerClock bm = new BufferManagerClock();
 
 		String listToRead[] = { "A", "B", "A", "C", "D", "C", "E", "F", "G", "A" };
-		String listToRead2[] = { "A", "B", "A", "C", "D", "C", "A", "E", "B", "A" };
+		String listToRead2[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
 
-		for (int i = 0; i < listToRead.length; i++) {
+		for (int i = 0; i < listToRead2.length; i++) {
 			bm.read(listToRead2[i]);
 			System.out.println(bm);
 		}
-
-		System.out.println(bm);
 
 	}
 
