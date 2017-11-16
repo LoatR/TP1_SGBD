@@ -5,6 +5,8 @@ public class BufferManagerFIFO {
 	@SuppressWarnings("rawtypes")
 	private LinkedList bufferPool;
 	private static int BUFFER_POOL_SIZE = 4;
+	
+	private static int pageFaults = 0;
 
 	public BufferManagerFIFO() {
 		this.bufferPool = new LinkedList<Frame>();
@@ -19,10 +21,12 @@ public class BufferManagerFIFO {
 			if (bufferPool.size() < BUFFER_POOL_SIZE) {
 				// Si page pas dans le buffer et buffer pas plein
 				this.bufferPool.addFirst(new Frame(0, page));
+				pageFaults++;
 			} else {
 				// Le buffer est plein et la page n'est pas dans le buffer
 				bufferPool.removeLast();
 				this.bufferPool.addFirst(new Frame(0, page));
+				pageFaults++;
 			}
 		}
 	}
@@ -58,6 +62,8 @@ public class BufferManagerFIFO {
 				bm.read(listToRead2[i]);
 				System.out.println(bm);
 			}
+			
+			System.out.println("Nombre d'accès disk : " + pageFaults);
 
 			
 		}

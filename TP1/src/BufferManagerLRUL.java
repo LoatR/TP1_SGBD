@@ -6,6 +6,8 @@ public class BufferManagerLRUL {
 	private LinkedList bufferPool;
 	private static int BUFFER_POOL_SIZE = 4;
 	
+	private static int pageFaults = 0;
+	
 	public BufferManagerLRUL(){
 		this.bufferPool = new LinkedList<Frame>();
 	}
@@ -24,10 +26,12 @@ public class BufferManagerLRUL {
 			if(bufferPool.size() < BUFFER_POOL_SIZE){
 				//Le buffer est pas plein
 				this.bufferPool.addFirst(new Frame(0, page));
+				pageFaults++;
 			}else{
 				//Le buffer est plein
 				this.bufferPool.removeLast();
 				this.bufferPool.addFirst(new Frame(0, page));
+				pageFaults++;
 			}
 		}
 	}
@@ -62,6 +66,8 @@ public class BufferManagerLRUL {
 			bm.read(listToRead[i]);
 			System.out.println(bm);
 		}
+		
+		System.out.println("Nombre d'accès disk : " + pageFaults);
 		
 	}
 	

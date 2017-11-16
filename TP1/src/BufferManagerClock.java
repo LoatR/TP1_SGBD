@@ -6,6 +6,8 @@ public class BufferManagerClock {
 	private int needlePos = 0; // Position de l'aiguille
 
 	private static int BUFFER_POOL_SIZE = 4;
+	
+	private static int pageFaults;
 
 	public BufferManagerClock() {
 		this.bufferPool = new Frame[BUFFER_POOL_SIZE];
@@ -23,6 +25,7 @@ public class BufferManagerClock {
 			}else{
 				//La page n'existe pas
 				this.bufferPool[this.sizeBuffer()] = new Frame(0, page);
+				pageFaults++;
 			}
 		}else {
 			//Le buffer est PLEIN
@@ -67,6 +70,7 @@ public class BufferManagerClock {
 	public void remplace(String page){
 		this.bufferPool[needlePos] = new Frame(0, page);
 		this.next();
+		pageFaults++;
 	}
 	
 	public void next(){
@@ -100,6 +104,7 @@ public class BufferManagerClock {
 			System.out.println(bm);
 		}
 
+		System.out.println("Nombre d'accès disk : " + pageFaults);
 	}
 
 }
