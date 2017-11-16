@@ -1,4 +1,3 @@
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -6,30 +5,32 @@ public class Main {
 		BufferManagerFIFO bf = new BufferManagerFIFO();
 		BufferManagerClock bc = new BufferManagerClock();
 
-		//String listToRead[] = { "A", "B", "A", "C", "D", "C", "E", "F", "G", "A" }; 
-		//String listToRead2[] = { "A", "B", "A", "C", "D", "C", "G", "E", "B", "A" }; 
-		//String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"}; 
+		String listToReadTest1[] = { "B", "C", "B", "A", "E", "B", "D", "C", "B", "D", "E", "C"};
+		// LRU:6, FIFO:7, CLOCK:6
+		// LRU:6, CLOCK:6, FIFO:7
 		
-		String listToReadFromExo[] = { "B", "C", "B", "A", "E", "B", "D", "E", "C", "B", "D", "E", "C", "B", "D", "E", "C", "B", "E", "B"};
-		//LRU:6, FIFO:7, CLOCK:6
+		String listToReadTest2[] = { "B", "C", "B", "A", "E", "B", "D", "C"};
+		// LRU:6, FIFO:5, CLOCK:6
+		// FIFO:5, LRU:6, CLOCK:6
 		
-		String listToReadTest1[] = {"A", "B", "C", "D", "E", "D", "C"}; //5
+		String listToReadTest3[] ={"",""};
 		
+
 		System.out.println("--------------- LRU ------------------");
-		for (int i = 0; i < listToReadFromExo.length; i++) {
-			bl.read(listToReadFromExo[i]);
+		for (int i = 0; i < listToReadTest1.length; i++) {
+			bl.read(listToReadTest1[i]);
 			System.out.println(bl);
 		}
-		
+
 		System.out.println("--------------- FIFO ------------------");
-		for (int i = 0; i < listToReadFromExo.length; i++) {
-			bf.read(listToReadFromExo[i]);
+		for (int i = 0; i < listToReadTest1.length; i++) {
+			bf.read(listToReadTest1[i]);
 			System.out.println(bf);
 		}
-		
+
 		System.out.println("--------------- CLOCK ------------------");
-		for (int i = 0; i < listToReadFromExo.length; i++) {
-			bc.read(listToReadFromExo[i]);
+		for (int i = 0; i < listToReadTest1.length; i++) {
+			bc.read(listToReadTest1[i]);
 			System.out.println(bc);
 		}
 
