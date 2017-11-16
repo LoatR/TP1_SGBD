@@ -97,10 +97,13 @@ public class BufferManagerClock {
 
 		String listToRead[] = { "A", "B", "A", "C", "D", "C", "E", "F", "G", "A" };
 		String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
-		String listToRead2[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
+		
+		String listToReadFromExercise[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
+		
+		String listToReadTest1[] = {"A", "B", "C", "D", "E", "A"};
 
-		for (int i = 0; i < listToRead2.length; i++) {
-			bm.read(listToRead2[i]);
+		for (int i = 0; i < listToReadTest1.length; i++) {
+			bm.read(listToReadFromSuject[i]);
 			System.out.println(bm);
 		}
 
