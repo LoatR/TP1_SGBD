@@ -80,6 +80,10 @@ public class BufferManagerClock {
 			needlePos++;
 		}
 	}
+	
+	 public static int getPageFaults() {
+			return pageFaults;
+		}
 
 	@Override
 	public String toString() {
@@ -95,15 +99,17 @@ public class BufferManagerClock {
 	public static void main(String[] args) {
 		BufferManagerClock bm = new BufferManagerClock();
 
-		String listToRead[] = { "A", "B", "A", "C", "D", "C", "E", "F", "G", "A" };
-		String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
+		//String listToRead[] = { "A", "B", "A", "C", "D", "C", "E", "F", "G", "A" }; //8
+		//String listToRead2[] = { "A", "B", "A", "C", "D", "C", "G", "E", "B", "A" }; //8
+		//String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"}; //10
 		
-		String listToReadFromExercise[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
+		String listToReadFromExo[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
+		//6
 		
-		String listToReadTest1[] = {"A", "B", "C", "D", "E", "A"};
+		String listToReadTest1[] = {"A", "B", "C", "D", "E", "D", "C"}; //5
 
 		for (int i = 0; i < listToReadTest1.length; i++) {
-			bm.read(listToReadFromSuject[i]);
+			bm.read(listToReadTest1[i]);
 			System.out.println(bm);
 		}
 

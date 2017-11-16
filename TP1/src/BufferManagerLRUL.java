@@ -46,7 +46,11 @@ public class BufferManagerLRUL {
 	}
 	
 	
-	 @Override
+	 public static int getPageFaults() {
+		return pageFaults;
+	}
+
+	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		for(int i=0; i < this.bufferPool.size(); i++){
@@ -59,13 +63,22 @@ public class BufferManagerLRUL {
 	public static void main(String[] args) {
 		BufferManagerLRUL bm = new BufferManagerLRUL();
 		
-		String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"};
-		String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
+		//String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"}; 
+		//LRU:8, FIFO:8, CLOCK:8
 		
-		String listToReadTest1[] = {"A", "B", "C", "D", "E", "A"};
+		//String listToRead2[] = { "A", "B", "A", "C", "D", "C", "G", "E", "B", "A" };
+		//LRU:8, FIFO:8, CLOCK:8
+		
+		//String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
+		//LRU:10, FIFO:10, CLOCK:10
+		
+		String listToReadFromExo[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
+		//LRU:6, FIFO:7, CLOCK:6
+		
+		String listToReadTest1[] = {"A", "B", "C", "D", "E", "D", "C"}; //5
 		 
-		for(int i = 0; i<listToReadTest1.length; i++){
-			bm.read(listToReadFromSuject[i]);
+		for(int i = 0; i<listToReadFromExo.length; i++){
+			bm.read(listToReadFromExo[i]);
 			System.out.println(bm);
 		}
 		

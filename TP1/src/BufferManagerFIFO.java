@@ -40,6 +40,10 @@ public class BufferManagerFIFO {
 		return -1;
 
 	}
+	
+	 public static int getPageFaults() {
+			return pageFaults;
+		}
 
 	 @Override
 		public String toString() {
@@ -54,14 +58,17 @@ public class BufferManagerFIFO {
 	 public static void main(String[] args) {
 			BufferManagerFIFO bm = new BufferManagerFIFO();
 			
-			String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"};
-			String listToRead2[] = { "A", "B", "A", "C", "D", "C", "G", "E", "B", "A" };
-			String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"};
+			//String listToRead[] = {"A", "B", "A", "C", "D", "C", "E", "F", "G", "A"}; //8
+			//String listToRead2[] = { "A", "B", "A", "C", "D", "C", "G", "E", "B", "A" }; //8			
+			//String listToReadFromSuject[] = {"A", "B", "C", "D", "E", "A", "B", "C", "D", "E"}; //10
 			
-			String listToReadTest1[] = {"A", "B", "C", "D", "E", "A"};
+			String listToReadFromExo[] = { "2", "3", "2", "1", "5", "2", "4", "5", "3", "2", "4", "5", "3", "2", "4", "5", "3", "2", "5", "2"};
+			//7
+			
+			String listToReadTest1[] = {"A", "B", "C", "D", "E", "D", "C"}; //5
 
-			for (int i = 0; i < listToReadTest1.length; i++) {
-				bm.read(listToReadFromSuject[i]);
+			for (int i = 0; i < listToReadFromExo.length; i++) {
+				bm.read(listToReadFromExo[i]);
 				System.out.println(bm);
 			}
 			
